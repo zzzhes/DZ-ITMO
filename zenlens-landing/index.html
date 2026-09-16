@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ZenLens — умные контактные линзы с нейрофильтрацией: уберите из поля зрения рекламу, визуальный шум и всё, на что вам не хочется смотреть.">
+  <title>ZenLens — умные контактные линзы с нейрофильтрацией</title>
+
+  <!-- Шрифты: Oswald — узкий гротеск для заголовков, Inter — основной текст,
+       Marck Script — рукописный акцент логотипа -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marck+Script&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap подключается ТОЛЬКО ради компонента Accordion в секции «Вопросы и ответы».
+       Все остальные секции свёрстаны вручную на Flexbox и собственном CSS. -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body id="top">
+
+  <!-- ============================================================
+       1. HEADER — position: fixed, меню в <nav> списком <ul><li><a>
+       ============================================================ -->
+  <header class="header">
+    <div class="header__inner">
+
+      <!-- Логотип: рукописное начертание отражает идею «своей», настроенной вручную
+           реальности — технология остаётся личной, а не корпоративной -->
+      <a class="logo" href="#top" aria-label="ZenLens — на главную">
+        <span class="logo__script">зенленз</span>
+        <span class="logo__sub">since 2062</span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#about">Проблема</a></li>
+          <li class="nav__item"><a class="nav__link" href="#tech">Технология</a></li>
+          <li class="nav__item"><a class="nav__link" href="#catalog">Каталог</a></li>
+          <li class="nav__item"><a class="nav__link" href="#compare">Сравнение</a></li>
+          <li class="nav__item"><a class="nav__link" href="#video">Видео</a></li>
+          <li class="nav__item"><a class="nav__link" href="#faq">Вопросы</a></li>
+          <li class="nav__item"><a class="nav__link nav__link--accent" href="#order">Тест-драйв</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         2. HERO — background-image, <h1> и назначение продукта
+         ============================================================ -->
+    <section class="hero" id="hero">
+
+      <!-- Декоративные плашки коллажа: position: absolute + transform -->
+      <span class="hero__slab hero__slab--1" aria-hidden="true"></span>
+      <span class="hero__slab hero__slab--2" aria-hidden="true"></span>
+      <span class="hero__tape" aria-hidden="true">no ads · no noise · no stress</span>
+
+      <div class="hero__inner container">
+
+        <p class="hero__kicker">
+          Умные контактные линзы ZenLens<br>
+          с функцией выборочной блокировки реальности
+        </p>
+
+        <div class="hero__stage">
+          <h1 class="hero__title">
+            <span class="hero__title-line">Zen</span><span class="hero__title-line hero__title-line--thin">Lens</span>
+          </h1>
+          <span class="hero__script" aria-hidden="true">revolution</span>
+          <img class="hero__lens" src="assets/img/lens.png" width="410" height="289"
+               alt="Умная контактная линза ZenLens с золотой антенной и микрочипом">
+        </div>
+
+        <div class="hero__bottom">
+          <p class="hero__lead">
+            Настройте свой мир без визуального шума,<br>
+            назойливой рекламы и бывших.
+          </p>
+          <a class="btn btn--primary" href="#order">Заказать</a>
+          <p class="hero__price">от <strong>14 900 ₽</strong> за стартовый набор</p>
+        </div>
+
+      </div>
+
+      <a class="hero__scroll" href="#about" aria-label="Пролистать вниз">scroll</a>
+    </section>
+
+
+    <!-- ============================================================
+         3. ПРОБЛЕМА — фоновое фото + чёрная карточка поверх (absolute)
+         ============================================================ -->
+    <section class="problem" id="about">
+
+      <span class="problem__note problem__note--left" aria-hidden="true">Может, хватит?<br>Всё достало…</span>
+      <span class="problem__note problem__note--right" aria-hidden="true">Опять реклама.<br>А зачем?</span>
+
+      <div class="problem__card">
+        <p class="problem__text">
+          Каждый день мы сталкиваемся с вещами, которые портят настроение и забирают ресурс.
+        </p>
+        <p class="problem__text">
+          Это могут быть бесконечные рекламные билборды, хмурые лица в метро
+          или гора неглаженого белья на стуле.
+        </p>
+        <p class="problem__text problem__text--muted">
+          Вы тратите огромное количество энергии на то, чтобы игнорировать этот стресс.
+          Пора взять зрение под свой полный контроль и оставить в поле зрения только эстетику.
+        </p>
+        <a class="link-underline" href="#video">Смотреть видео</a>
+      </div>
+
+      <ul class="problem__stats">
+        <li class="problem__stat"><b>4 000+</b><span>рекламных сообщений в день видит горожанин</span></li>
+        <li class="problem__stat"><b>2,5 ч</b><span>в сутки уходит на визуальный шум</span></li>
+        <li class="problem__stat"><b>0 мс</b><span>задержка нейрофильтра ZenLens</span></li>
+      </ul>
+    </section>
+
+
+    <!-- ============================================================
+         4. ТЕХНОЛОГИЯ — sticky-заголовок + карточки с CSS-фильтрами
+         ============================================================ -->
+    <section class="tech" id="tech">
+      <div class="container tech__inner">
+
+        <div class="tech__aside">
+          <h2 class="section-title">Как работает<br>нейрофильтрация?</h2>
+          <p class="tech__lead">
+            Встроенный в линзу прозрачный микрочип анализирует изображение в реальном времени
+            и мгновенно синхронизируется с приложением на вашем смартфоне.
+          </p>
+          <img class="tech__phone" src="assets/img/app-phone.jpg" width="1200" height="670"
+               alt="Приложение ZenLens распознаёт объекты на экране смартфона">
+        </div>
+
+        <ul class="features">
+          <li class="feature">
+            <span class="feature__num" aria-hidden="true">01</span>
+            <img class="feature__img" src="assets/img/feature-detect.jpg" width="1000" height="558"
+                 alt="Нейросеть подсвечивает распознанные объекты на улице">
+            <h3 class="feature__title">Распознавание объектов</h3>
+            <p class="feature__text">
+              Искусственный интеллект определяет триггеры из вашего чёрного списка за миллисекунды.
+            </p>
+          </li>
+
+          <li class="feature">
+            <span class="feature__num" aria-hidden="true">02</span>
+            <img class="feature__img" src="assets/img/feature-blur.jpg" width="1000" height="558"
+                 alt="Нежелательный объект размывается прямо в поле зрения">
+            <h3 class="feature__title">Мягкий блюр</h3>
+            <p class="feature__text">
+              Нежелательные объекты аккуратно размываются или заменяются на нейтральные
+              паттерны и текстуры.
+            </p>
+          </li>
+
+          <li class="feature">
+            <span class="feature__num" aria-hidden="true">03</span>
+            <img class="feature__img" src="assets/img/feature-safety.jpg" width="1000" height="558"
+                 alt="Светофор и переход остаются видимыми при любых настройках фильтра">
+            <h3 class="feature__title">Полная безопасность</h3>
+            <p class="feature__text">
+              Оптические фильтры автоматически отключаются при переходе дороги,
+              вождении или экстренных ситуациях.
+            </p>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         5. КАТАЛОГ — категории с карточками товаров
+         ============================================================ -->
+    <section class="catalog" id="catalog">
+      <div class="container">
+
+        <header class="section-head">
+          <h2 class="section-title">Каталог<br>наборов</h2>
+          <p class="section-desc">
+            Три категории линз — от базового блокировщика рекламы
+            до полной пересборки реальности с AR-слоем.
+          </p>
+        </header>
+
+        <ul class="products">
+
+          <li class="product">
+            <span class="product__badge">базовый</span>
+            <div class="product__media">
+              <img class="product__img" src="assets/img/feature-blur.jpg" width="1000" height="558"
+                   alt="Набор ZenLens Base в городской среде">
+            </div>
+            <h3 class="product__title">ZenLens <em>Base</em></h3>
+            <p class="product__text">
+              Блокировка наружной рекламы, вывесок и push-экранов.
+              12 готовых пресетов фильтрации и ночной режим.
+            </p>
+            <p class="product__price">14 900 ₽</p>
+            <a class="btn btn--ghost" href="#order">Выбрать</a>
+          </li>
+
+          <li class="product product--featured">
+            <span class="product__badge product__badge--accent">выбор 8 из 10</span>
+            <div class="product__media">
+              <img class="product__img" src="assets/img/feature-detect.jpg" width="1000" height="558"
+                   alt="Набор ZenLens Pro распознаёт людей и объекты">
+            </div>
+            <h3 class="product__title">ZenLens <em>Pro</em></h3>
+            <p class="product__text">
+              Персональный чёрный список: лица, бренды, объекты и целые категории.
+              Синхронизация настроек между всеми вашими линзами.
+            </p>
+            <p class="product__price">24 900 ₽</p>
+            <a class="btn btn--primary" href="#order">Выбрать</a>
+          </li>
+
+          <li class="product">
+            <span class="product__badge">максимум</span>
+            <div class="product__media">
+              <img class="product__img" src="assets/img/tech-lab.jpg" width="1200" height="670"
+                   alt="Лаборатория ZenLens: настройка AR-слоя">
+            </div>
+            <h3 class="product__title">ZenLens <em>Ultra</em></h3>
+            <p class="product__text">
+              Замена объектов на собственные текстуры, AR-слой поверх реальности
+              и безлимитная база нейрофильтров.
+            </p>
+            <p class="product__price">39 900 ₽</p>
+            <a class="btn btn--ghost" href="#order">Выбрать</a>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         6. ТАБЛИЦА сравнительных характеристик
+         ============================================================ -->
+    <section class="compare" id="compare">
+      <div class="container">
+
+        <header class="section-head">
+          <h2 class="section-title">Сравнение<br>моделей</h2>
+          <p class="section-desc">
+            Все модели работают на одном чипе ZN-7. Отличается объём базы фильтров,
+            автономность и глубина настройки.
+          </p>
+        </header>
+
+        <div class="table-wrap">
+          <table class="specs">
+            <caption class="specs__caption">Характеристики линз ZenLens, поколение 2062</caption>
+
+            <thead>
+              <tr>
+                <th scope="col">Характеристика</th>
+                <th scope="col">Base</th>
+                <th scope="col" class="is-featured">Pro</th>
+                <th scope="col">Ultra</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <th scope="row">Фильтров в базе</th>
+                <td>12</td>
+                <td class="is-featured">240</td>
+                <td>без лимита</td>
+              </tr>
+              <tr>
+                <th scope="row">Скорость распознавания</th>
+                <td>80 мс</td>
+                <td class="is-featured">24 мс</td>
+                <td>8 мс</td>
+              </tr>
+              <tr>
+                <th scope="row">Автономность</th>
+                <td>14 часов</td>
+                <td class="is-featured">20 часов</td>
+                <td>36 часов</td>
+              </tr>
+              <tr>
+                <th scope="row">Личный чёрный список</th>
+                <td>—</td>
+                <td class="is-featured">до 500 объектов</td>
+                <td>без ограничений</td>
+              </tr>
+              <tr>
+                <th scope="row">Замена объектов текстурами</th>
+                <td>—</td>
+                <td class="is-featured">базовые паттерны</td>
+                <td>свои пресеты</td>
+              </tr>
+              <tr>
+                <th scope="row">AR-слой поверх реальности</th>
+                <td>—</td>
+                <td class="is-featured">—</td>
+                <td>есть</td>
+              </tr>
+              <tr>
+                <th scope="row">Аварийное отключение фильтров</th>
+                <td>есть</td>
+                <td class="is-featured">есть</td>
+                <td>есть</td>
+              </tr>
+              <tr>
+                <th scope="row">Гарантия</th>
+                <td>1 год</td>
+                <td class="is-featured">2 года</td>
+                <td>3 года</td>
+              </tr>
+            </tbody>
+
+            <tfoot>
+              <tr>
+                <th scope="row">Цена набора</th>
+                <td>14 900 ₽</td>
+                <td class="is-featured">24 900 ₽</td>
+                <td>39 900 ₽</td>
+              </tr>
+            </tfoot>
+
+          </table>
+        </div>
+        <p class="table-hint">Таблицу можно прокрутить по горизонтали →</p>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         7. ВИДЕО о продукте
+         ============================================================ -->
+    <section class="video" id="video">
+      <div class="container video__inner">
+
+        <div class="video__text">
+          <h2 class="section-title section-title--light">Сформируйте<br>свою реальность</h2>
+          <p class="section-desc section-desc--light">
+            Полторы минуты о том, как нейрофильтр собирает картинку заново
+            и почему вы перестаёте замечать то, что вам не нужно.
+          </p>
+          <a class="btn btn--light" href="#order">Пройти тест-драйв</a>
+        </div>
+
+        <!-- Видео с видеохостинга. Чтобы поставить свой ролик, замените
+             идентификатор после /embed/ на id нужного видео с YouTube. -->
+        <div class="video__frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ?rel=0"
+            title="Видео о технологии нейрофильтрации ZenLens"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         8. FAQ — единственная секция на Bootstrap (компонент Accordion)
+         ============================================================ -->
+    <section class="faq" id="faq">
+      <div class="container faq__inner">
+
+        <header class="section-head">
+          <h2 class="section-title">Вопросы<br>и ответы</h2>
+          <p class="section-desc">
+            Собрали то, о чём чаще всего спрашивают перед первой примеркой.
+          </p>
+        </header>
+
+        <div class="accordion" id="faqAccordion">
+
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="faqHeadingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                Это безопасно для глаз?
+              </button>
+            </h3>
+            <div id="faqCollapseOne" class="accordion-collapse collapse show"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Линза сделана из гидрогеля третьего поколения и пропускает кислород лучше,
+                чем обычные однодневные линзы. Микрочип прозрачный, он не перекрывает зрачок
+                и не нагревается выше температуры тела.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="faqHeadingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                А если фильтр скроет что-то важное?
+              </button>
+            </h3>
+            <div id="faqCollapseTwo" class="accordion-collapse collapse"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Аварийный контур работает отдельно от нейрофильтра: на пешеходном переходе,
+                за рулём, при резком движении объекта или сигнале тревоги фильтрация
+                отключается за 8 миллисекунд и включается обратно сама.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="faqHeadingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                Кто видит мой чёрный список?
+              </button>
+            </h3>
+            <div id="faqCollapseThree" class="accordion-collapse collapse"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Только вы. Список хранится в защищённой памяти самой линзы, а приложение
+                синхронизирует его напрямую с устройством. Мы не передаём эти данные
+                рекламодателям — на этом построена вся идея продукта.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="faqHeadingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+                Сколько носится одна пара?
+              </button>
+            </h3>
+            <div id="faqCollapseFour" class="accordion-collapse collapse"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Один комплект рассчитан на 30 дней ежедневного ношения. В стартовый набор
+                входят две пары и капсула-зарядка, которая восстанавливает заряд за ночь.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="faqHeadingFive">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faqCollapseFive" aria-expanded="false" aria-controls="faqCollapseFive">
+                Подойдёт ли при близорукости?
+              </button>
+            </h3>
+            <div id="faqCollapseFive" class="accordion-collapse collapse"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Да. Линзы выпускаются с оптической силой от −8 до +6 диоптрий с шагом 0,25.
+                Нужные параметры укажете в заявке — набор соберут под ваш рецепт.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         9. ФОРМА обратной связи
+         ============================================================ -->
+    <section class="order" id="order">
+      <div class="container order__inner">
+
+        <div class="order__aside">
+          <h2 class="section-title section-title--light">Оставьте<br>заявку</h2>
+          <p class="section-desc section-desc--light">
+            Закажите стартовый набор ZenLens прямо сейчас и получите месяц премиум-подписки
+            на расширенную базу фильтров в подарок.
+          </p>
+          <ul class="order__list">
+            <li>Примерка в студии ZenLens — бесплатно</li>
+            <li>Настройка первых фильтров вместе с оптиком</li>
+            <li>Возврат в течение 14 дней без вопросов</li>
+          </ul>
+          <img class="order__barcode" src="assets/img/barcode.png" width="740" height="493" alt="">
+        </div>
+
+        <!-- Форма без серверного обработчика: это учебный лендинг,
+             проверка полей выполняется средствами HTML (required, type, pattern). -->
+        <form class="form" action="#order" method="post" novalidate>
+
+          <fieldset class="form__group">
+            <legend class="form__legend">Контактные данные</legend>
+
+            <label class="field">
+              <span class="field__label">Имя <b>*</b></span>
+              <input class="field__input" type="text" name="name" required
+                     minlength="2" placeholder="Как к вам обращаться">
+            </label>
+
+            <label class="field">
+              <span class="field__label">E-mail <b>*</b></span>
+              <input class="field__input" type="email" name="email" required
+                     placeholder="you@zenlens.ru">
+            </label>
+
+            <label class="field">
+              <span class="field__label">Телефон</span>
+              <input class="field__input" type="tel" name="phone"
+                     pattern="[0-9+()\- ]{7,18}" placeholder="+7 (___) ___-__-__">
+            </label>
+          </fieldset>
+
+          <fieldset class="form__group">
+            <legend class="form__legend">Выберите набор <b>*</b></legend>
+
+            <div class="radios">
+              <label class="radio">
+                <input class="radio__input" type="radio" name="plan" value="base" required>
+                <span class="radio__mark" aria-hidden="true"></span>
+                <span class="radio__text">Base — 14 900 ₽</span>
+              </label>
+              <label class="radio">
+                <input class="radio__input" type="radio" name="plan" value="pro" checked>
+                <span class="radio__mark" aria-hidden="true"></span>
+                <span class="radio__text">Pro — 24 900 ₽</span>
+              </label>
+              <label class="radio">
+                <input class="radio__input" type="radio" name="plan" value="ultra">
+                <span class="radio__mark" aria-hidden="true"></span>
+                <span class="radio__text">Ultra — 39 900 ₽</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form__group">
+            <legend class="form__legend">Детали заказа</legend>
+
+            <!-- <select> добавлен сверх обязательного минимума: он экономит время
+                 менеджеру — сразу видно, в какой город везти набор, и не нужен
+                 отдельный звонок для уточнения. -->
+            <label class="field">
+              <span class="field__label">Город доставки</span>
+              <select class="field__input field__input--select" name="city">
+                <option value="msk">Москва</option>
+                <option value="spb">Санкт-Петербург</option>
+                <option value="ekb">Екатеринбург</option>
+                <option value="other">Другой город</option>
+              </select>
+            </label>
+
+            <!-- <input type="range"> тоже добавлен осознанно: острота фильтрации —
+                 главный параметр продукта, ползунок показывает его нагляднее
+                 обычного поля ввода и сразу вовлекает пользователя. -->
+            <label class="field">
+              <span class="field__label">Желаемая сила фильтрации</span>
+              <input class="field__range" type="range" name="power" min="0" max="100" step="10" value="60">
+              <span class="field__hint">от лёгкой дымки до полной замены объектов</span>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Комментарий</span>
+              <textarea class="field__input field__textarea" name="message" rows="4"
+                        placeholder="Расскажите, что хотите убрать из поля зрения"></textarea>
+            </label>
+          </fieldset>
+
+          <div class="form__checks">
+            <label class="check">
+              <input class="check__input" type="checkbox" name="agree" required>
+              <span class="check__mark" aria-hidden="true"></span>
+              <span class="check__text">Согласен на обработку персональных данных <b>*</b></span>
+            </label>
+
+            <label class="check">
+              <input class="check__input" type="checkbox" name="news" checked>
+              <span class="check__mark" aria-hidden="true"></span>
+              <span class="check__text">Присылать новые пресеты фильтров раз в месяц</span>
+            </label>
+          </div>
+
+          <button class="btn btn--primary btn--wide" type="submit">Отправить заявку</button>
+          <p class="form__note"><b>*</b> — поля, обязательные для заполнения</p>
+
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       10. FOOTER — название продукта и ссылки на соцсети
+       ============================================================ -->
+  <footer class="footer" id="contacts">
+    <div class="container footer__inner">
+
+      <nav class="footer__nav" aria-label="Навигация в подвале">
+        <ul class="footer__list">
+          <li><a class="footer__link" href="#about">О нас</a></li>
+          <li><a class="footer__link" href="#tech">Технология</a></li>
+          <li><a class="footer__link" href="#catalog">Каталог</a></li>
+          <li><a class="footer__link" href="#faq">Вопросы</a></li>
+          <li><a class="footer__link" href="#order">Тест-драйв</a></li>
+        </ul>
+      </nav>
+
+      <ul class="socials">
+        <li>
+          <a class="social" href="https://t.me" aria-label="Telegram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path fill="currentColor" d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.2 13 2.6 11.6c-1-.3-1-1 .2-1.5l17.8-6.9c.8-.3 1.5.2 1.3 1.1Z"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a class="social" href="https://vk.com" aria-label="ВКонтакте" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path fill="currentColor" d="M13 17.5c-5.2 0-8.5-3.7-8.6-9.8h2.7c.1 4.5 2.1 6.4 3.6 6.8V7.7h2.5v3.9c1.5-.2 3.1-1.9 3.6-3.9h2.5c-.4 2.4-2 4.1-3.1 4.8 1.1.6 2.9 2.1 3.6 4.9h-2.8c-.6-1.8-2-3.2-3.8-3.4v3.5H13Z"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a class="social" href="https://youtube.com" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path fill="currentColor" d="M22 12s0-3.3-.4-4.9a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.7C2 8.7 2 12 2 12s0 3.3.4 4.9c.2.9.9 1.5 1.8 1.7C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.3 22 12 22 12ZM10 15V9l5.2 3L10 15Z"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a class="social" href="mailto:hello@zenlens.ru" aria-label="Написать на почту">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path fill="currentColor" d="M3 5h18c.6 0 1 .4 1 1v12c0 .6-.4 1-1 1H3c-.6 0-1-.4-1-1V6c0-.6.4-1 1-1Zm9 8 8-5H4l8 5Zm0 2L4 10v7h16v-7l-8 5Z"/>
+            </svg>
+          </a>
+        </li>
+      </ul>
+
+      <div class="footer__brand">
+        <span class="footer__logo">зенленз</span>
+        <p class="footer__tagline">Создайте свою комфортную визуальную среду уже сегодня.</p>
+      </div>
+
+      <div class="footer__meta">
+        <p>© 2062 ZenLens Optics</p>
+        <p>Москва, Пресненская наб. 12 · <a class="footer__link" href="tel:+74950000062">+7&nbsp;495&nbsp;000&#8209;00&#8209;62</a></p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Кнопка «наверх»: position: fixed -->
+  <a class="to-top" href="#top" aria-label="Наверх">↑</a>
+
+  <!-- Bootstrap JS нужен только для работы аккордеона в секции FAQ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
