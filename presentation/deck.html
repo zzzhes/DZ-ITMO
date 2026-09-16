@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>ZenLens — защита проекта</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root {
+  --bg: #f1f0ee;
+  --ink: #0d0d0d;
+  --paper: #fff;
+  --red: #e8100f;
+  --grey: #77756f;
+  --line: rgba(13, 13, 13, .16);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #9a9a97;
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--ink);
+}
+
+@page { size: 1280px 720px; margin: 0; }
+
+.slide {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  padding: 58px 72px 56px;
+  background: var(--bg);
+  overflow: hidden;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide:last-child { page-break-after: auto; }
+
+.slide.dark { background: var(--ink); color: var(--paper); }
+.slide.paper { background: var(--paper); }
+
+/* служебные метки слайда */
+.tag {
+  position: absolute;
+  top: 58px;
+  left: 72px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.dark .tag { color: rgba(255, 255, 255, .5); }
+
+.num {
+  position: absolute;
+  right: 72px;
+  bottom: 44px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  letter-spacing: .2em;
+  color: var(--grey);
+}
+
+.dark .num { color: rgba(255, 255, 255, .5); }
+
+.mark {
+  position: absolute;
+  left: 34px;
+  bottom: 96px;
+  transform-origin: left center;
+  white-space: nowrap;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--red);
+  transform: rotate(-90deg);
+}
+
+h1, h2, h3 { margin: 0; font-weight: 400; }
+
+.h {
+  margin: 44px 0 26px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 50px;
+  line-height: .96;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.h b { font-weight: 600; }
+.h .red { color: var(--red); }
+
+.lead {
+  max-width: 560px;
+  margin: 0 0 22px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--grey);
+}
+
+.dark .lead { color: rgba(255, 255, 255, .72); }
+
+.cols { display: flex; gap: 46px; flex: 1; }
+.col { flex: 1; }
+.col-end { display: flex; flex-direction: column; }
+
+.script { font-family: 'Marck Script', cursive; color: var(--red); }
+
+/* титул */
+.title-slide { justify-content: center; padding-top: 150px; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 320px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 128px;
+  line-height: .9;
+  text-transform: uppercase;
+}
+
+.brand .thin { font-weight: 200; color: var(--grey); }
+
+.stage { position: relative; display: flex; justify-content: center; }
+
+.stage img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 218px;
+  transform: translate(-50%, -52%);
+  filter: drop-shadow(0 20px 30px rgba(13, 13, 13, .25));
+}
+
+.stage .script {
+  position: absolute;
+  left: 50%;
+  bottom: -46px;
+  font-size: 104px;
+  line-height: 1;
+  white-space: nowrap;
+  transform: translateX(-50%) rotate(-5deg);
+}
+
+.title-sub {
+  margin-top: 74px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.title-sub p { margin: 0; }
+
+.title-main {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.title-meta { font-size: 13px; line-height: 1.7; color: var(--grey); text-align: right; }
+
+.slab {
+  position: absolute;
+  top: 132px;
+  left: -50px;
+  width: 260px;
+  height: 40px;
+  background: var(--ink);
+  transform: rotate(-1.5deg);
+}
+
+.tape {
+  position: absolute;
+  top: 300px;
+  right: -74px;
+  padding: 6px 16px;
+  background: var(--red);
+  color: var(--paper);
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  transform: rotate(90deg);
+}
+
+/* списки */
+.list { margin: 0; padding: 0; list-style: none; }
+
+.list li {
+  display: flex;
+  gap: 14px;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dark .list li { border-color: rgba(255, 255, 255, .18); }
+
+.list i {
+  flex-shrink: 0;
+  width: 26px;
+  font-family: 'Oswald', sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  color: var(--red);
+  padding-top: 2px;
+}
+
+.list-tag i { width: 52px; }
+.list-pos i { width: 68px; }
+.list b { font-family: 'Oswald', sans-serif; font-weight: 500; letter-spacing: .03em; }
+.list span { color: var(--grey); }
+.dark .list span { color: rgba(255, 255, 255, .6); }
+
+/* код */
+pre {
+  margin: 0;
+  padding: 18px 20px;
+  background: var(--ink);
+  color: #e7e6e3;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.75;
+  white-space: pre;
+}
+
+.paper pre, .slide pre { border-left: 3px solid var(--red); }
+pre .p { color: #ff5f5e; }
+pre .c { color: #8f8d87; }
+
+.note-line {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: var(--grey);
+}
+
+.dark .note-line { color: rgba(255, 255, 255, .6); }
+
+/* палитра и шрифты */
+.swatches { display: flex; gap: 12px; margin-bottom: 26px; }
+
+.sw { flex: 1; }
+
+.sw span {
+  display: block;
+  height: 86px;
+  border: 1px solid var(--line);
+}
+
+.sw p {
+  margin: 8px 0 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.fonts { display: flex; flex-direction: column; gap: 16px; }
+
+.font-row {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.font-row em {
+  flex-shrink: 0;
+  width: 96px;
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.sample-os { font-family: 'Oswald', sans-serif; font-size: 30px; letter-spacing: .06em; text-transform: uppercase; }
+.sample-in { font-family: 'Inter', sans-serif; font-size: 19px; }
+.sample-ms { font-family: 'Marck Script', cursive; font-size: 34px; }
+
+/* картинки */
+.shot { border: 1px solid var(--line); }
+.dark .shot { border-color: rgba(255, 255, 255, .2); }
+
+.devices { display: flex; align-items: flex-end; justify-content: center; gap: 26px; }
+.device { text-align: center; }
+.device img { display: block; border: 1px solid var(--line); object-fit: cover; object-position: top; }
+
+.device p {
+  margin: 10px 0 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.figure { position: relative; }
+
+.figure img { display: block; width: 100%; }
+
+.caption {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px 12px;
+  background: var(--red);
+  color: var(--paper);
+  font-family: 'Oswald', sans-serif;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+/* цифры итога */
+.figures { display: flex; gap: 14px; margin-bottom: 24px; }
+
+.fig {
+  flex: 1;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, .22);
+}
+
+.fig b {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 34px;
+  font-weight: 500;
+}
+
+.fig span { font-size: 12px; color: rgba(255, 255, 255, .6); }
+
+.links { margin: 0; padding: 0; list-style: none; font-size: 14px; }
+
+.links li {
+  display: flex;
+  gap: 16px;
+  padding: 9px 0;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+}
+
+.links em {
+  flex-shrink: 0;
+  width: 128px;
+  font-style: normal;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.links span { color: rgba(255, 255, 255, .8); }
+
+.end {
+  margin-top: auto;
+  font-family: 'Marck Script', cursive;
+  font-size: 68px;
+  line-height: 1;
+  color: var(--paper);
+}
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide title-slide">
+  <span class="slab"></span>
+  <span class="tape">no ads · no noise · no stress</span>
+  <p class="tag">Основы веб-разработки и вёрстки · итоговый проект</p>
+
+  <div class="stage">
+    <h1 class="brand"><span>Zen</span><span class="thin">Lens</span></h1>
+    <img src="img/lens.png" alt="">
+    <span class="script">revolution</span>
+  </div>
+
+  <div class="title-sub">
+    <p class="title-main">Лендинг умных<br>контактных линз</p>
+    <p class="title-meta">
+      Фамилия Имя, группа<br>
+      Университет ИТМО · 2026
+    </p>
+  </div>
+  <span class="num">01</span>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <p class="tag">Задача</p>
+  <span class="mark">бриф</span>
+  <h2 class="h">Что нужно было<br><b>сделать</b></h2>
+
+  <div class="cols">
+    <div class="col">
+      <p class="lead">
+        Сверстать лендинг продукта или услуги. Восемь обязательных блоков,
+        все — своими руками.
+      </p>
+      <ul class="list">
+        <li><i>01</i><span><b>Шапка</b> с меню в теге nav</span></li>
+        <li><i>02</i><span><b>Первый экран</b> с фоновым изображением и h1</span></li>
+        <li><i>03</i><span><b>Карточки товаров</b> с фильтрами на фото</span></li>
+        <li><i>04</i><span><b>Таблица</b> характеристик</span></li>
+        <li><i>05</i><span><b>Видео</b> о продукте</span></li>
+        <li><i>06</i><span><b>Вопросы и ответы</b> на аккордеоне Bootstrap</span></li>
+        <li><i>07</i><span><b>Форма</b> с input, textarea, checkbox, radio</span></li>
+        <li><i>08</i><span><b>Подвал</b> с соцсетями</span></li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <p class="lead">
+        Плюс требования к самой вёрстке — их я держал в голове на каждом блоке.
+      </p>
+      <ul class="list">
+        <li><i>—</i><span>Макет на <b>Flexbox</b></span></li>
+        <li><i>—</i><span><b>Адаптивность</b> под разные экраны</span></li>
+        <li><i>—</i><span>Разные способы <b>позиционирования</b></span></li>
+        <li><i>—</i><span>Плавные <b>transition</b> при наведении</span></li>
+        <li><i>—</i><span><b>Transform</b> на части элементов</span></li>
+        <li><i>—</i><span><b>Bootstrap</b> — только в блоке вопросов</span></li>
+      </ul>
+      <p class="note-line">
+        Готовый шаблон брать не стал: придумал продукт и весь визуальный язык под него.
+      </p>
+    </div>
+  </div>
+  <span class="num">02</span>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <p class="tag">Продукт</p>
+  <span class="mark">идея</span>
+  <h2 class="h">Линзы, которые<br>убирают <span class="red">лишнее</span></h2>
+
+  <div class="cols">
+    <div class="col">
+      <p class="lead">
+        ZenLens — умные контактные линзы 2062 года. Чип в линзе распознаёт объекты
+        и расфокусирует то, что человек внёс в свой стоп-лист: рекламу, вывески,
+        экраны, отдельные лица.
+      </p>
+      <ul class="list list-tag">
+        <li><i>кто</i><span>Горожане 25–40 лет, которые устали от рекламного шума</span></li>
+        <li><i>боль</i><span>4 000 рекламных сообщений в день, 2,5 часа внимания впустую</span></li>
+        <li><i>оффер</i><span>Три набора от 14 900 ₽, примерка в студии бесплатно</span></li>
+        <li><i>тон</i><span>Спокойная ирония вместо технологического пафоса</span></li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <div class="figure">
+        <img class="shot" src="img/hero.jpg" alt="Первый экран лендинга">
+        <span class="caption">первый экран</span>
+      </div>
+      <p class="note-line">
+        Тему выбрал так, чтобы было что показать во всех обязательных блоках:
+        линейка наборов даёт карточки и таблицу, спорная технология — вопросы и ответы.
+      </p>
+    </div>
+  </div>
+  <span class="num">03</span>
+</section>
+
+<!-- 4 -->
+<section class="slide paper">
+  <p class="tag">Визуальный язык</p>
+  <span class="mark">стиль</span>
+  <h2 class="h">Коллаж, красный<br>и ломаная сетка</h2>
+
+  <div class="cols">
+    <div class="col">
+      <div class="swatches">
+        <div class="sw"><span style="background:#f1f0ee"></span><p>#f1f0ee<br>фон</p></div>
+        <div class="sw"><span style="background:#0d0d0d"></span><p>#0d0d0d<br>текст</p></div>
+        <div class="sw"><span style="background:#e8100f"></span><p>#e8100f<br>акцент</p></div>
+        <div class="sw"><span style="background:#77756f"></span><p>#77756f<br>второй план</p></div>
+      </div>
+      <p class="note-line">
+        Три цвета и один акцент. Красный работает только там, где нужно действие
+        или важная цифра, — поэтому его замечают.
+      </p>
+    </div>
+
+    <div class="col">
+      <div class="fonts">
+        <div class="font-row"><em>заголовки</em><span class="sample-os">Oswald 300/600</span></div>
+        <div class="font-row"><em>текст</em><span class="sample-in">Inter — читаемая основа</span></div>
+        <div class="font-row"><em>акценты</em><span class="sample-ms">зенленз revolution</span></div>
+      </div>
+      <p class="note-line">
+        За основу взял брутализм и вёрстку Дэвида Карсона: рваная сетка, наложения,
+        рукописные реплики поверх фотографий. Фотографии — чёрно-белые, цвет
+        возвращается только при наведении.
+      </p>
+    </div>
+  </div>
+  <span class="num">04</span>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <p class="tag">Структура</p>
+  <span class="mark">карта страницы</span>
+  <h2 class="h">Девять экранов<br>одной истории</h2>
+
+  <div class="cols">
+    <div class="col">
+      <ul class="list">
+        <li><i>01</i><span><b>Шапка</b> — меню на семь якорей, всегда на виду</span></li>
+        <li><i>02</i><span><b>Первый экран</b> — имя продукта и оффер</span></li>
+        <li><i>03</i><span><b>Зачем</b> — про рекламный шум, цифры проблемы</span></li>
+        <li><i>04</i><span><b>Как работает</b> — три шага: узнаёт, убирает, уступает</span></li>
+        <li><i>05</i><span><b>Наборы</b> — три карточки товара с ценами</span></li>
+      </ul>
+      <ul class="list">
+        <li><i>06</i><span><b>Что внутри</b> — таблица характеристик</span></li>
+        <li><i>07</i><span><b>Видео</b> — ролик о продукте</span></li>
+        <li><i>08</i><span><b>Вопросы</b> — аккордеон на Bootstrap</span></li>
+        <li><i>09</i><span><b>Заявка и подвал</b> — бланк заказа и контакты</span></li>
+      </ul>
+      <p class="note-line">
+        Порядок собран по логике: сначала проблема, потом объяснение,
+        и только после этого цена и форма.
+      </p>
+    </div>
+
+    <div class="col" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding-bottom:30px;">
+      <img class="shot" src="img/full-page.jpg" style="height:452px; width:auto;" alt="Лендинг целиком">
+      <p style="margin:0; font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--grey);">страница целиком</p>
+    </div>
+  </div>
+  <span class="num">05</span>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <p class="tag">Вёрстка</p>
+  <span class="mark">flexbox</span>
+  <h2 class="h">Весь макет<br>собран на <b>flex</b></h2>
+
+  <div class="cols">
+    <div class="col">
+      <p class="lead">
+        Ни одного float и ни одной таблицы для раскладки. Ряды карточек, шапка,
+        двухколоночные блоки и бланк заявки — всё на flex-контейнерах.
+      </p>
+      <pre><span class="p">.cards</span> {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+<span class="c">/* карточки стоят на разной высоте */</span>
+<span class="p">.card</span>       { flex: 1 1 300px; }
+<span class="p">.card-dark</span>  { flex: 1.15 1 320px; margin-top: 54px; }
+<span class="p">.card-up</span>    { margin-top: 24px; }</pre>
+    </div>
+
+    <div class="col">
+      <div class="figure">
+        <img class="shot" src="img/tech.jpg" alt="Блок «Как это работает»">
+        <span class="caption">шаг 02 опущен вниз</span>
+      </div>
+      <p class="note-line">
+        Ровный ряд читается как таблица, поэтому карточки и шаги я намеренно
+        сдвинул по вертикали — глаз идёт по диагонали, а не по линейке.
+        Сдвиг задаётся обычным margin, при сужении экрана он обнуляется.
+      </p>
+    </div>
+  </div>
+  <span class="num">06</span>
+</section>
+
+<!-- 7 -->
+<section class="slide paper">
+  <p class="tag">Позиционирование</p>
+  <span class="mark">position</span>
+  <h2 class="h">Четыре способа —<br>четыре задачи</h2>
+
+  <div class="cols">
+    <div class="col">
+      <ul class="list list-pos">
+        <li><i>fixed</i><span><b>Шапка и кнопка «наверх»</b> — не уезжают при прокрутке</span></li>
+        <li><i>sticky</i><span><b>Колонка «Как это работает»</b> — заголовок держится, пока листаются шаги</span></li>
+        <li><i>absolute</i><span><b>Линза, надпись revolution, рукописные реплики, бейджи и номера</b> — слои поверх фотографий</span></li>
+        <li><i>relative</i><span><b>Секции и карточки</b> — точки отсчёта для слоёв</span></li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <pre><span class="p">.header</span> {
+  position: fixed;
+  top: 0; left: 0;
+  backdrop-filter: blur(10px);
+}
+
+<span class="p">.tech-side</span> {
+  position: sticky;
+  top: calc(var(--head) + 32px);
+}
+
+<span class="p">.hero-lens</span> {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+}</pre>
+      <p class="note-line">
+        Вертикальные подписи на полях — тоже absolute, развёрнутый на 90 градусов.
+      </p>
+    </div>
+  </div>
+  <span class="num">07</span>
+</section>
+
+<!-- 8 -->
+<section class="slide dark">
+  <p class="tag">Движение</p>
+  <h2 class="h">Ничего не прыгает<br><b>без причины</b></h2>
+
+  <div class="cols">
+    <div class="col">
+      <ul class="list">
+        <li><i>—</i><span><b>transition</b> на каждом интерактивном элементе: кнопки, ссылки, карточки, поля бланка</span></li>
+        <li><i>—</i><span><b>transform</b> — карточка приподнимается, фото увеличивается, логотип и выбранный набор чуть поворачиваются</span></li>
+        <li><i>—</i><span><b>filter</b> — фотографии лежат в чёрно-белом, цвет возвращается при наведении</span></li>
+        <li><i>—</i><span><b>keyframes</b> — линза на первом экране медленно покачивается</span></li>
+      </ul>
+      <p class="note-line">
+        Все длительности в диапазоне 0,25–0,6 секунды: заметно, но не мешает читать.
+      </p>
+    </div>
+
+    <div class="col">
+      <pre><span class="p">.card</span> {
+  transition: transform .4s, box-shadow .4s;
+}
+<span class="p">.card:hover</span> {
+  transform: translateY(-10px);
+  box-shadow: 14px 14px 0 rgba(13,13,13,.1);
+}
+
+<span class="p">.card-photo img</span> { filter: grayscale(.4); }
+<span class="p">.card:hover .card-photo img</span> {
+  filter: none;
+  transform: scale(1.07) rotate(.6deg);
+}</pre>
+    </div>
+  </div>
+  <span class="num">08</span>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <p class="tag">Адаптивность</p>
+  <span class="mark">1240 · 1100 · 900 · 640</span>
+  <h2 class="h">От монитора<br>до телефона</h2>
+
+  <div class="cols">
+    <div class="col" style="flex:0 0 430px;">
+      <ul class="list">
+        <li><i>900</i><span>Меню переезжает под логотип в две строки, колонки схлопываются в одну</span></li>
+        <li><i>900</i><span>Таблица получает горизонтальную прокрутку и подсказку под ней</span></li>
+        <li><i>900</i><span>Декоративные плашки прячутся — на узком экране они лезут на текст</span></li>
+        <li><i>640</i><span>Слова Zen и Lens встают друг под другом, линза — между ними</span></li>
+        <li><i>640</i><span>Бланк выпрямляется, поля выстраиваются в столбик</span></li>
+      </ul>
+    </div>
+
+    <div class="col devices">
+      <div class="device"><img src="img/dev-desk.jpg" width="330" height="400" alt="Десктоп"><p>1440</p></div>
+      <div class="device"><img src="img/dev-tab.jpg" width="176" height="330" alt="Планшет"><p>820</p></div>
+      <div class="device"><img src="img/dev-mob.jpg" width="108" height="270" alt="Телефон"><p>390</p></div>
+    </div>
+  </div>
+  <span class="num">09</span>
+</section>
+
+<!-- 10 -->
+<section class="slide dark">
+  <p class="tag">Итог</p>
+  <h2 class="h">Что получилось</h2>
+
+  <div class="cols">
+    <div class="col col-end">
+      <div class="figures">
+        <div class="fig"><b>9</b><span>блоков лендинга</span></div>
+        <div class="fig"><b>1&nbsp;700</b><span>строк HTML и CSS</span></div>
+        <div class="fig"><b>1</b><span>блок на Bootstrap</span></div>
+      </div>
+      <ul class="list">
+        <li><i>—</i><span>Разметка проходит валидатор без ошибок</span></li>
+        <li><i>—</i><span>Ни строчки своего JavaScript: аккордеон работает на Bootstrap, проверка полей — штатная, браузерная</span></li>
+        <li><i>—</i><span>Все изображения — из собственного макета продукта</span></li>
+      </ul>
+      <img src="img/barcode.png" width="150" style="margin-top:auto; filter:invert(1); mix-blend-mode:screen; opacity:.6;" alt="">
+    </div>
+
+    <div class="col col-end">
+      <ul class="links">
+        <li><em>проект</em><span>codesandbox.io/p/sandbox/zenlens-rygmmj</span></li>
+        <li><em>исходники</em><span>github.com/zzzhes/DZ-ITMO</span></li>
+        <li><em>видео</em><span>ссылка на защиту</span></li>
+      </ul>
+      <p class="note-line" style="margin-top:22px;">
+        Что забрал из работы: научился держать сложную сетку на одном flex,
+        не ломая её на телефоне, и понял, что ломать правила вёрстки
+        стоит осознанно — иначе это просто ошибки.
+      </p>
+      <span class="end script">спасибо</span>
+    </div>
+  </div>
+  <span class="num">10</span>
+</section>
+
+</body>
+</html>
